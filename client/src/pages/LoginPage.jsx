@@ -7,8 +7,8 @@ import { UserContext } from "../UserContext";
 
 
 export default function LoginPage() {
-  const [email, setemail] = useState('');
-  const [password, setpassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [redirect , setRedirect] = useState(false)
 
   const {setUser} =useContext(UserContext);
@@ -38,13 +38,13 @@ export default function LoginPage() {
             type="email"
             placeholder="your Email.com"
             value={email}
-            onChange={(ev) => setemail(ev.target.email)}
+            onChange={(ev) => setEmail(ev.target.value)}
           />
           <input
             type="Password"
             placeholder="Password"
             value={password}
-            onChange={(ev) => setpassword(ev.target.password)}
+            onChange={(ev) => setPassword(ev.target.value)}
           />
           <button className="bg-red-400 p-2 w-full text-white rounded-2xl">
             Login
@@ -52,7 +52,7 @@ export default function LoginPage() {
           <div className="text-center py-2">
             {" "}
             Create an account{" "}
-            <Link className="underline text-black" to={"/register"}>
+            <Link className="underline text-black" to = {'/register'}>
               Register
             </Link>
           </div>

@@ -3,7 +3,7 @@
 export default function IndexPage() {
     return (
         <div>
-            Index Page here
+            Index Page here gdgddgf
         </div>
     );
 }
