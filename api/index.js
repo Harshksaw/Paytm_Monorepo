@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const User = require("./models/User.js");
 const jwtSecret = 'falsesjfdu232jeje2je2jsjjif'
-require("dotenv").config();
+require('dotenv').config();
 
 const cookieParser = require("cookie-parser");
 
@@ -18,9 +18,10 @@ app.use(express.json());
 app.use(cookieParser())
 
 app.use(cors({
-        credentials: true,
-        origin: 'http://localhost:5173',
-    }));
+    credentials: true,
+    origin: 'http://localhost:5173',
+  }));
+
 console.log(process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI);
 
@@ -45,18 +46,20 @@ app.post('/register', async (req, res) => {
 });
 
 //Login
-app.post("/login", async (req, res) => {
+app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     await UserModel.findOne({ email });
     if (userDoc) {
         res.json("found");
         const passOk = bcrypt.compareSync(password, userDoc.password);
         if (passOk) {
-            jwt.sign({email: userDoc.email, id : userDoc._id,
-                name: userDoc.name},jwtSecret,(err, token)=>{
-                if(err) throw err;
+            jwt.sign({
+                email: userDoc.email, id: userDoc._id,
+                name: userDoc.name
+            }, jwtSecret, (err, token) => {
+                if (err) throw err;
                 res.cookie('token', token).json(userDoc);
-            } )
+            })
 
 
 
@@ -68,21 +71,21 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.get('/profile', (req, res)=>{
-    const {token} = req.cookies;
-    if(token){
-        jwt.verify(token ,jwtSecret, {}, async(err, user)=>{
-            if(err) throw err;
-            const {name , email , id}  = await User.findById(userData.id)
+app.get('/profile', (req, res) => {
+    const { token } = req.cookies;
+    if (token) {
+        jwt.verify(token, jwtSecret, {}, async (err, user) => {
+            if (err) throw err;
+            const { name, email, id } = await User.findById(userData.id)
 
-            res.json({name,email,_id});
+            res.json({ name, email, _id });
 
         })
-    }else{
+    } else {
         res.json(null)
     }
-}) 
-app.post('logout', (req, res)=>{
+})
+app.post('logout', (req, res) => {
     res.cookie('token', '').json(true);
 })
 
