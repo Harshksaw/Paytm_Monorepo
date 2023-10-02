@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require("cors");
+const cors = require('cors');
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
@@ -19,7 +19,7 @@ app.use(cookieParser())
 
 app.use(cors({
         credentials: true,
-        origin: 'http://127.0.0.1:5173',
+        origin: 'http://localhost:5173',
     }));
 console.log(process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI);
@@ -71,16 +71,21 @@ app.post("/login", async (req, res) => {
 app.get('/profile', (req, res)=>{
     const {token} = req.cookies;
     if(token){
-        jwt.verify(token ,jwtSecret, {}, (err, user)=>{
+        jwt.verify(token ,jwtSecret, {}, async(err, user)=>{
             if(err) throw err;
+            const {name , email , id}  = await User.findById(userData.id)
 
-            res.json(user);
+            res.json({name,email,_id});
 
         })
     }else{
         res.json(null)
     }
 }) 
+app.post('logout', (req, res)=>{
+    res.cookie('token', '').json(true);
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
