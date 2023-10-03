@@ -1,97 +1,127 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
+import Perks from "../Perks";
 
 export default function PlacesPage() {
     const { action } = useParams();
+    console.log(action);
+    const [title, setTitle] = useState("");
+    const [address, setAddress] = useState("");
+    const [addedPhotos, setAddedPhotos] = useState([]);
+    const [photoLink, setPhotoLink] = useState("");
+    const [perks, setperks] = useState([]);
+    const [extraInfo, setExtraInfo] = useState("");
+    const [checkIn, setCheckIn] = useState("");
+    const [checkOut, setCheckOut] = useState("");
+    const [maxGuests, setMaxGuests] = useState(1);
 
+    function inputHeader(text) {
+        return <h2 className="text-2xl mt-4">{text}</h2>;
+    }
 
+    function inputDescription(text) {
+        return <p className="test-gray-500 text-sm"> {text} </p>;
+    }
+    function preInput(header, description) {
+        return (
+            <>
+                {inputHeader(header)}
+                {inputDescription(description)}
+            </>
+        );
+    }
     return (
         <div>
-            {action !== 'new' && (
-
+            {action !== "new" && (
                 <div className="text-center">
-                    <Link className=" inline-flex gap-1 bg-primary  text-white py-2 px-4 " to={'/accounts/places/new'}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    <Link
+                        className=" inline-flex gap-1 bg-primary  text-white py-2 px-4 "
+                        to={"/account/places/new"}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 4.5v15m7.5-7.5h-15"
+                            />
                         </svg>
-                        Add New</Link>
-
-
+                        Add New
+                    </Link>
                 </div>
             )}
-            {action === 'new' && (
+            {action === "new" && (
                 <div>
                     <form>
+                        {preInput(
+                            'Title',
+                            'Title for your place , should be short and catchy'
+                        )}
 
-                        <h2 className="text-xl" >Title</h2>
-                        <p className="text-gray-500 text-sm">Title for your place , should be short  and catchy </p>
                         <input type="text" placeholder="title , example my apartment" />
-                        <h2 className="text-xl" >Address to this place </h2>
-                        <input type="text" placeholder="address" />
 
-                        <h2 className="text-xl mt-4" >Photos</h2>
-                        <p className="text-gray-500 text-sm"></p>
+                        {preInput("Address", "Address to this place")}
+
+                        <input type="text" placeholder="address" />
+                        {preInput("Photos", "MOre = Better")}
+
                         <div className="flex gap-2">
                             <input type="text" placeholder={"add using a link...JPG"} />
                             <button className="bg-gray-200 px-4">Add&nbsp; Photo</button>
                         </div>
                         <div className="grid gird-cols-3 mt-2 lg:grid:cols-6 md:grid-cols-4">
                             <button className="flex justify-center gap-1 border bg-transparent rounded-2xl p-8 text-gray-600 ">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-8 h-8"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                    />
                                 </svg>
-
-                                Upload from Your Device</button>
-
+                                Upload from Your Device
+                            </button>
                         </div>
-                        <h2 className="text-2xl mt-4">Description</h2>
-                        <p className="text-gray-500 text-sm">Description of the Place </p>
+                        {preInput("Description", "Description of the Place")}
+
                         <textarea />
-                        <h2 className="text-2xl mt-4">Perks</h2>
-                        <p className="text-gray-500 text-sm"> select all the perk of Place </p>
+                        {preInput("Perks", "Select all the perk of place")}
+
+                        <div className="grid grid-cols-2 mt-2 md:grid-cols-4 lg:grid">
+                            <Perks selected={perks} OnChange={setperks} />
+                        </div>
+                        {preInput("Extra INfo", "House RUles , etc")}
+
+                        <div className="grid sm:grid-cols-3 gap-2">
+                            <h3 className="mt-2 -mb-1">Check in time</h3>
+                            <input type="text" placeholder="14:00" />
+                        </div>
+                        <div className="mt-2 -mb-1">
+                            <h3>Check out time</h3>
+                            <input type="" />
+                        </div>
                         <div>
-                            <label>
-                                <input type="checkbox" />
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z" />
-                                </svg>
-
-                                <span>WIfi</span>
-                            </label>
-                            <label>
-                                <input type="checkbox" />
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-                                </svg>
-
-                                <span>Free parking sport</span>
-                            </label>
-                            <label>
-
-                                <span>Tv</span>
-                            </label>
-                            <label>
-                                <input type="checkbox" />
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
-                                </svg>
-
-                                <span>Pets</span>
-                            </label>
-                            <label>
-                                <input type="checkbox" />
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                                </svg>
-
-                                <span>Private Entrance</span>
-                            </label>
-
-
+                            <h3 className="mt-2 -mb-1">Max number of guests</h3>
+                            <input type="" />
+                        </div>
+                        <div>
+                            <button className="primary my-4">Save</button>
                         </div>
                     </form>
                 </div>
             )}
         </div>
-    )
+    );
 }
