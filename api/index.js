@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URI);
 app.get("/test", (req, res) => {
     res.json("text ok");
 });
-
+app.use('/uploads', express.static(__dirname + '/uploads'))
 app.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -93,13 +93,13 @@ app.post('/logout', (req, res) => {
 
 console.log({__dirname})
 app.post('/upload-by-link', async (req, res)=>{
-    const {Link} = req.body;
+    const {link} = req.body;
     const newName = Date.now() + '.jpg';
-    await imageDownloader.image({
-        url : Link,
+    await download.image({
+        url : link,
         dest : __dirname+'/uploads' + newName,
     })
-    req.json(__dirname+'/uploads' + newName)
+    res.json(newName)
 
 })
 
