@@ -32,18 +32,19 @@ export default function PlacesPage() {
     );
   }
   async function addPhotoByLink(ev) {
-    ev.preventDefault();
-    try {
-      const { data: filename } = await axios.post("/upload-by-link", {
+
+      ev.preventDefault();
+
+      const { data:filename } = await axios.post('/upload-by-link', {
         link: photoLink,
       });
       setAddedPhotos((prev) => {
         return [...prev, filename];
       });
-      setPhotoLink("");
-    } catch (e) {
-      console.log("Axios Request Error", e);
-    }
+      setPhotoLink('');
+
+
+
   }
 
   return (
@@ -100,10 +101,11 @@ export default function PlacesPage() {
               </button>
             </div>
             <div className="grid gird-cols-3 mt-2 gap-2 lg:grid:cols-6 md:grid-cols-4">
-              {addedPhotos.length > 0 &&
-                addedPhotos.map((link , index) => <div key={index}>
-                    <img className="rounded-2xl" src={"http://localhost:4000/uploads/" + link}></img>
-                     </div>)}
+                {addedPhotos.length > 0 &&  addedPhotos.map((link , index) => 
+                <div key={index}>
+                    
+                  <img className="rounded-2xl" src={"http://localhost:4000/uploads/" + link} alt=""></img>
+                </div>)}
 
               <button className="flex justify-center gap-1 border bg-transparent rounded-2xl p-8 text-gray-600 ">
                 <svg
