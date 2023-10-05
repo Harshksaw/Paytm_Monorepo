@@ -9,6 +9,8 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const imageDownloader = require("image-downloader");
 const path = require("path");
+const fs = require('fs')
+const multer = require('multer');
 
 const app = express();
 const PORT = 4000;
@@ -96,7 +98,7 @@ app.post("/logout", (req, res) => {
   res.cookie("token", "").json(true);
 });
 
-console.log({ __dirname });
+
 app.post("/upload-by-link", async (req, res) => {
 
     const {link} = req.body;
@@ -109,6 +111,25 @@ app.post("/upload-by-link", async (req, res) => {
     });
     res.json(newName)
 });
+
+const photoMiddleware = multer({dest: 'uploads'});
+
+app.post('/upload',photoMiddleware.array('photos', 100) , (req, res)=>{
+
+    const uploadedFiles = []
+    for (let i = 0 ; i< req.files.length; i++){
+      const {path, origignalname} = req.files[i];
+      const parts = origignalname.split('.')
+      const ext = parts[parts.length - 1];
+      const newpath = path + '.' + ext;
+
+      fs.renameSync(pat , newpath);
+      uploadedFiles.push(newpath.replace('uploads/', ''));
+    }
+    res.json(uploadedFiles)
+
+})
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
