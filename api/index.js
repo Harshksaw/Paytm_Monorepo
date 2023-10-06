@@ -11,7 +11,7 @@ const imageDownloader = require("image-downloader");
 const path = require("path");
 const fs = require('fs')
 const multer = require('multer');
-
+const Place = require('./models/Place.js')
 const app = express();
 const PORT = 4000;
 
@@ -112,22 +112,41 @@ app.post("/upload-by-link", async (req, res) => {
     res.json(newName)
 });
 
-const photoMiddleware = multer({dest: 'uploads'});
+const photoMiddleware = multer({dest: 'uploads/'});
 
-app.post('/upload',photoMiddleware.array('photos', 100) , (req, res)=>{
-
-    const uploadedFiles = []
-    for (let i = 0 ; i< req.files.length; i++){
-      const {path, origignalname} = req.files[i];
-      const parts = origignalname.split('.')
+app.post('/upload', photoMiddleware.array('photos', 100), (req, res) => {
+  const uploadedFiles = [];
+  for (let i = 0; i < req.files.length; i++) {
+      const fileInfo = req.files[i];
+    // if (fileInfo && fileInfo.path && fileInfo.originalname) {
+      const { path, originalname } = fileInfo;
+      const parts = originalname.split('.');
       const ext = parts[parts.length - 1];
-      const newpath = path + '.' + ext;
 
-      fs.renameSync(pat , newpath);
-      uploadedFiles.push(newpath.replace('uploads/', ''));
-    }
-    res.json(uploadedFiles)
+      const newPath = path + '.' + ext;
+      fs.renameSync(path, newPath);
+      uploadedFiles.push(newPath.replace('uploads/', ''));
+    // }
+  }
+  res.json(uploadedFiles);
+});
 
+app.post('/places',(req, res) => {
+  const { token } = req.cookies;
+  const {title , address, addedPhotos, description,
+  perks , extraInfo , checkIn , checkOut , maxGuests, } = req.body;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) throw err;
+
+    //retrieve the info and saving into data base
+    const placedoc = await Place.create({
+      owner: userData,id,
+      title , address, addedPhotos, description,
+  perks , extraInfo , checkIn , checkOut , maxGuests, 
+
+    }); //retrieving from from PlacesPages -> storing and database
+    res.json(placedoc)
+  })
 })
 
 
