@@ -141,7 +141,7 @@ app.post('/places',(req, res) => {
     //retrieve the info and saving into data base
     const placedoc = await Place.create({
       owner: userData,id,
-      title , address, addedPhotos, description,
+      title , address, photos : addedPhotos, description,
   perks , extraInfo , checkIn , checkOut , maxGuests, 
 
     }); //retrieving from from PlacesPages -> storing and database
@@ -149,6 +149,18 @@ app.post('/places',(req, res) => {
   })
 })
 
+app.get('/places' , (req , res)=>{
+  const{token} = req.cookies;
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    const {id}= userData;
+    res.json(await Place.find({owner: id}))
+
+  })
+})
+app.get('/places/:id',async (req, res)=>{
+  const {id} =req.params
+  res.json(await Place.findById(id));
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
