@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export default function PhotosUploader({addedPhotos , onChange}) {
+export default function PhotosUploader() {
 
 const [photoLink, setPhotoLink] = useState('');
 
@@ -53,7 +53,7 @@ function uploadPhotos(ev) {
 
             <div className=" grid gird-cols-3 mt-2 gap-2 lg:grid:cols-6 md:grid-cols-4">
                 {addedPhotos.length > 0 &&
-                    addedPhotos.map((link) => (
+                    addedPhotos.map((link ) => (
                         <div key={link} className="h-32 flex ">
                             <img
                                 className="rounded-2xl w-full object-cover position-center"
