@@ -10,7 +10,7 @@ export default function PlacesFormPage() {
     const {id} = useParams(); 
     const [addedPhotos, setAddedPhotos] = useState([]);
     const [description, setDescription] = useState("");
-    const [perks, setperks] = useState([]);
+    const [perks, setPerks] = useState([]);
     const [extraInfo, setExtraInfo] = useState("");
     const [checkIn, setCheckIn] = useState("");
     const [checkOut, setCheckOut] = useState("");
@@ -27,7 +27,7 @@ export default function PlacesFormPage() {
                 setAddress(data.address);
                 setAddedPhotos(data.photos);
                 setDescription(data.description);
-                setperks(data.perks)
+                setPerks(data.perks)
                 setExtraInfo(data.extraInfo);
                 setCheckIn(data.checkIn);
                 setCheckOut(data.checkOut);
@@ -51,29 +51,42 @@ export default function PlacesFormPage() {
             </>
         );
     }
-    async function addNewPlaces(ev) {
+    async function savePlace(ev) {
         ev.preventDefault();
-        await axios.post('/places',{
+        const placeData = {
             title,
             address,
             addedPhotos,
             description,
-            extraInfo,
             perks,
+            extraInfo,
             checkIn,
             checkOut,
-            maxGuests,
-        })
-        setRedirect(true)
+            maxGuests
+        }
+
+        if(id){
+            //update
+            await axios.put('/places',{
+                id, ...placeData
+            })
+            setRedirect(true);
+        }
+        else{
+            //newplace
+            await axios.post('/places',placeData)
+            setRedirect(true)
+        }
     }
     if(redirect){
         return <Navigate to ={'/account/places'}/>
+
     }
         return (
             <>
                 <div>
                     <AccountNav/>
-                    <form onSubmit={addNewPlaces}>
+                    <form onSubmit={savePlace}>
                         {preInput(
                             "Title",
                             "Title for your place , should be short and catchy"
@@ -86,10 +99,7 @@ export default function PlacesFormPage() {
                         <input type="text" placeholder="address" />
                         {preInput("Photos", "MOre = Better")}
 
-                        <PhotosUploader
-                            addedPhotos = {addedPhotos}
-                            onChange = {setAddedPhotos}
-                        />
+                        <PhotosUploader addedPhotos = {addedPhotos} onChange = {setAddedPhotos} />
 
                         {preInput("Description", "Description of the Place")}
 
@@ -100,7 +110,7 @@ export default function PlacesFormPage() {
                         {preInput("Perks", "Select all the perk of place")}
 
                         <div className="grid grid-cols-2 mt-2 md:grid-cols-4 lg:grid">
-                            <Perks selected={perks} OnChange={setperks} />
+                            <Perks selected = {perks} OnChange={setPerks} />
                         </div>
                         {preInput("Extra Info", "House Rules , etc")}
                         <textarea

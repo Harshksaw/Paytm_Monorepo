@@ -13,7 +13,7 @@ export default function Perks({ selected, OnChange}){
     return (
         <>
             <label className="border p-4 flex-round-2xl gap-2 items-center">
-                <input type="checkbox" name= {'wifi'} onChange = {handleCbClick}/>
+                <input type="checkbox" name= {'wifi'} checked ={selected.includes('wifi')} onChange = {handleCbClick}/>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -33,7 +33,7 @@ export default function Perks({ selected, OnChange}){
                 </label>
             </label>
             <label className="border p-4 flex-round-2xl gap-2 items-center">
-                <input type="checkbox" name= {'parking'}  onChange = {handleCbClick}/>
+                <input type="checkbox" name= {'parking'} checked ={selected.includes('parking')} onChange = {handleCbClick}/>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -53,7 +53,7 @@ export default function Perks({ selected, OnChange}){
                 </label>
             </label>
             <label className="border p-4 flex-round-2xl gap-2 items-center">
-                <input type="checkbox" name= {'tv'}  onChange = {handleCbClick}/>
+                <input type="checkbox" name= {'tv'} checked ={selected.includes('tv')}  onChange = {handleCbClick}/>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -72,7 +72,7 @@ export default function Perks({ selected, OnChange}){
                 <span>Tv</span>
             </label>
             <label className="border p-4 flex-round-2xl gap-2 items-center">
-                <input type="checkbox" name={'pets'}   onChange = {handleCbClick}/>
+                <input type="checkbox" name={'pets'} checked ={selected.includes('pets')} onChange = {handleCbClick}/>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -91,7 +91,7 @@ export default function Perks({ selected, OnChange}){
                 <span>Pets</span>
             </label>
             <label className="border p-4 flex-round-2xl gap-2 items-center">
-                <input type="checkbox" name={'enterance'} onChange = {handleCbClick} />
+                <input type="checkbox" name={'enterance'} checked ={selected.includes('enterance')} onChange = {handleCbClick} />
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

@@ -1,24 +1,19 @@
-
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AccountNav from "../AccountNav";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 export default function PlacesPage() {
+  const {id} = useParams();
   const [places, setPlaces] = useState([]);
   useEffect(() => {
-    axios.get('/places').then(({ data }) => {
+    if(!id){
+      return;
+    }
+    axios.get(`/places/${id}`).then(({ data }) => {
       setPlaces(data);
-    })
-  }, [])
-
-
-
-
-
-
-
+    });
+  }, [id]);
 
   return (
     <div>
@@ -27,8 +22,6 @@ export default function PlacesPage() {
       <div className="text-center">
         List of all Added Places
         <br />
-
-
         <Link
           className=" inline-flex gap-1 bg-primary  text-white py-2 px-4 "
           to={"/account/places/new"}
@@ -51,26 +44,25 @@ export default function PlacesPage() {
         </Link>
       </div>
       <div className="mt-4 ">
-        {places.length > 0 && places.map(place => (
-
-
-          <Link  to ={'/account/places/'+ place._id}  key={place._id}  className=" flex cursor-pointer bg-gray-100  rounded-2xl p-4" >
-            <div className="w-32 h-32 bg-gray-300 grow shrink-0">
-              {place.photo.length > 0 && (
-                <img src={place.photos[0]} alt="" />
-              )}
-            </div>
-            <div className="grow-0 strink">
-
-              <h2 className="text-xl  " >{place.title}</h2>
-              <p className="text-dm mt-2">{place.description}</p>
-            </div>
-          </Link>
-
-        ))}
+        {places.length > 0 &&
+          places.map((place) => (
+            <Link
+              to={"/account/places/" + place._id}
+              key={place._id}
+              className=" flex cursor-pointer bg-gray-100  rounded-2xl p-4"
+            >
+              <div className="w-32 h-32 bg-gray-300 grow shrink-0">
+                {place.photo.length > 0 && (
+                <img  className="object-cover flex "
+                src={'http://localhost:4000/uploads/'+ place.photos[0]} alt="" />)}
+              </div>
+              <div className="grow-0 strink">
+                <h2 className="text-xl  ">{place.title}</h2>
+                <p className="text-dm mt-2">{place.description}</p>
+              </div>
+            </Link>
+          ))}
       </div>
-
-
     </div>
   );
 }
