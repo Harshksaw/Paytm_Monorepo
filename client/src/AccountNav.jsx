@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 export default function AccountNav() {
 
     const {pathname} = useLocation();
+    console.log(pathname)
     let subpage = pathname.split('/')?.[2];
     console.log({subpage})
 
@@ -15,10 +16,10 @@ export default function AccountNav() {
 
 
         let classes = 'inline-flex gap-2  py-2 px-6 rounded-full';
-        if (type === subpage) {
-            classes += 'bg-primary text-white ';
+        if (type === false) {
+            classes += 'text-blue-600';
         } else {
-            classes += 'bg-gray-200'
+            classes += 'text-red-200 bg-grey-500'
         }
         return classes;
     }
@@ -26,7 +27,7 @@ export default function AccountNav() {
     return (
         <nav className="w-full flex mt-8 gap-4 justify-center mb-8">
 
-            <Link className={linkClasses("profile")} to={"/account/profile"}>
+            <Link className={linkClasses("profile")} to={"/account"}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>

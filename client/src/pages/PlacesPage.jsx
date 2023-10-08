@@ -13,7 +13,7 @@ export default function PlacesPage() {
     axios.get(`/places/${id}`).then(({ data }) => {
       setPlaces(data);
     });
-  }, [id]);
+  }, []);
 
   return (
     <div>
@@ -44,8 +44,7 @@ export default function PlacesPage() {
         </Link>
       </div>
       <div className="mt-4 ">
-        {places.length > 0 &&
-          places.map((place) => (
+        {places.length > 0 && places.map(place => (
             <Link
               to={"/account/places/" + place._id}
               key={place._id}
