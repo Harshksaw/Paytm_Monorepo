@@ -16,7 +16,7 @@ export default function AccountNav() {
 
 
         let classes = 'inline-flex gap-2  py-2 px-6 rounded-full';
-        if (type === false) {
+        if (type === subpage) {
             classes += 'text-blue-600';
         } else {
             classes += 'text-red-200 bg-grey-500'

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 export default function Perks({ selected, onChange }) {
     function handleCbClick(ev) {
         const { checked, name } = ev.target;
@@ -7,7 +8,6 @@ export default function Perks({ selected, onChange }) {
             onChange([...selected.filter(selectedName => selectedName !== name)]);
         }
     }
-
     return (
         <>
             <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
@@ -57,3 +57,7 @@ export default function Perks({ selected, onChange }) {
         </>
     );
 }
+Perks.propTypes = {
+    selected: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onChange: PropTypes.func.isRequired,
+};
