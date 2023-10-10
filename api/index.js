@@ -162,7 +162,7 @@ app.put('/places', async (req,res) => {
   const {token} = req.cookies;
   const {
     id, title,address,addedPhotos,description,
-    perks,extraInfo,checkIn,checkOut,maxGuests,price,
+    perks,extraInfo,checkIn,checkOut,maxGuests,
   } = req.body;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
@@ -205,7 +205,7 @@ app.put('/places/:id', async(req, res)=>{
 
       })
       placeDoc.save();
-      res.json('ok');
+      res.json('ok')
 
       }
 

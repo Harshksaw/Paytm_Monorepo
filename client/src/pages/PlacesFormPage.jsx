@@ -23,7 +23,7 @@ export default function PlacesFormPage() {
         if (!id) {
             return;
         }
-        axios.get('/places/'+ id).then(response => {
+        axios.get('/places/' + id).then(response => {
             const { data } = response;
             setTitle(data.title);
             setAddress(data.address);
@@ -56,34 +56,29 @@ export default function PlacesFormPage() {
         );
     }
 
+
     async function savePlace(ev) {
         ev.preventDefault();
-
-           
-
+        const placeData = {
+            title, address, addedPhotos,
+            description, perks, extraInfo,
+            checkIn, checkOut, maxGuests,
+        };
         if (id) {
             // update
             await axios.put('/places', {
-                id,  title, address, addedPhotos,
-                    description, perks, extraInfo,
-                    checkIn, checkOut, maxGuests
-                
+                id, ...placeData
             });
             setRedirect(true);
-        } 
-        else {
+        } else {
             // new place
-            await axios.post('/places', { title, address, addedPhotos,
-                description, perks, extraInfo,
-                checkIn, checkOut, maxGuests
-            });
+            await axios.post('/places', placeData);
             setRedirect(true);
         }
 
     }
-
     if (redirect) {
-        return <Navigate to={'/account/places'} />
+        return <Navigate to={'/account'} />
     }
 
     return (
