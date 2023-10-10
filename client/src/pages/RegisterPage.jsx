@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
-import axios  from "axios";
+import axios from "axios";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -9,13 +9,13 @@ export default function RegisterPage() {
   async function registerUser(ev) {
     ev.preventDefault();
     try {
-      await axios.post('/register', {
+      await axios.post("/register", {
         name,
         email,
         password,
       });
-
       alert("Registration successful. Now you can log in");
+      <Navigate to={"/login"} />;
     } catch (e) {
       alert("Registration failed. Please try again later");
     }
@@ -46,7 +46,7 @@ export default function RegisterPage() {
           <button className="primary">Register</button>
           <div className="text-center py-2 text-gray-500">
             Already a member?{" "}
-            <Link className="underline text-black" to={"/login"}>
+            <Link className="underline text-primary" to={"/login"}>
               Login
             </Link>
           </div>
