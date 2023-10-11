@@ -27,8 +27,8 @@ export default function IndexPage() {
 
             <h3 className="font-bold ">{place.address}</h3>
             <h2 className="text-sm text-gray-500">{place.title}</h2>
-            <div className="mt-1">
-              <span className="font-bold">${place.price}</span> per night
+            <div className="mt-2 inline-block  bg-violet-200 hover:bg-gradient-to-r from-purple-500 to-pink-500">
+              <span className="font-bold">${(place.price) ? place.price: 100 }</span> per night
             </div>
           </Link>
         ))}

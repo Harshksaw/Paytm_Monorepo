@@ -1,7 +1,7 @@
 import { useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
-// import BookingWidget from "../BookingWidget";
+import BookingWidget from "../BookingWidget";
 import PlaceGallery from "../PlaceGallery";
 import AddressLink from "../AddressLink";
 
@@ -37,7 +37,7 @@ export default function PlacePage() {
           Max number of guests: {place.maxGuests}
         </div>
         <div>
-          {/* <BookingWidget place={place} /> */}
+          <BookingWidget place={place} />
           <h2>Booking WIdget</h2>
         </div>
       </div>
