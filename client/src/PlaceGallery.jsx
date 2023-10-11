@@ -9,7 +9,7 @@ export default function PlaceGallery({ place }) {
         <div className="p-8 grid gap-4 bg-black">
           <div>
             <h2 className="text-3xl mr-48">Photos of {place.title}</h2>
-            <button
+            <button className = "fixed flex gap-2 py-2 px-4 rounded-2xl shadow shadow-black"
               onClick={() => setShowAllPhotos(false)}
               className="fixed right-12 top-8 flex gap-1 py-2 px-4 rounded-2xl shadow shadow-black bg-white text-black"
             >
@@ -76,7 +76,7 @@ export default function PlaceGallery({ place }) {
       </div>
       <button
         onClick={() => setShowAllPhotos(true)}
-        className="flex gap-1 absolute bottom-2 right-2 py-2 px-4 bg-white rounded-2xl shadow-md shadow-gray-500"
+        className="flex gap-1 absolute bottom-2 right-2 py-2 px-4 bg-blue-500 rounded-2xl shadow-md shadow-gray-500"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

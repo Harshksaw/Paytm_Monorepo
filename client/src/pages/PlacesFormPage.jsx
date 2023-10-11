@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import {  Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Perks from "../Perks";
 import PhotosUploader from "../PhotosUploader";
@@ -24,8 +24,11 @@ export default function PlacesFormPage() {
       return;
     }
 
-    axios.get("/places/" + id).then((response) => {
+    axios.get("/places/"+id).then(response => {
       const { data } = response;
+      console.log(1)
+      console.log(data);
+      console.log(data.title)
       setTitle(data.title);
       setAddress(data.address);
       setAddedPhotos(data.photos);
