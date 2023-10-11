@@ -13,8 +13,8 @@ export default function IndexPage() {
   return (
     <div className="grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8">
       {places.length > 0 &&
-        places.map((place) => (
-          <Link key="" to={"/place/" + place._id}>
+        places.map((place, index) => (
+          <Link key={index} to={"/place/" + place._id}>
             <div className="bg-gray-500 rounded-2xl flex mb-2">
               {place.photos?.[0] && (
                 <img
