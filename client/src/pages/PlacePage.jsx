@@ -1,4 +1,4 @@
-import { useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import BookingWidget from "../BookingWidget";
@@ -38,7 +38,6 @@ export default function PlacePage() {
         </div>
         <div>
           <BookingWidget place={place} />
-          <h2>Booking WIdget</h2>
         </div>
       </div>
       <div className="bg-white -mx-8 px-8 py-8 border-t">
