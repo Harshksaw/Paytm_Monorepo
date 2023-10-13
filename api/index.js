@@ -24,11 +24,11 @@ const bucket = 'Harsh-booking';
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads'));
-const corsOptions = {
-  origin: 'https://airbnb-mern-six.vercel.app', // Replace with your Vercel app's URL
-  credentials: true, // Make sure to enable credentials if you're using cookies for authentication
-};
-app.use(cors(corsOptions));
+app.use(cors({
+  credentials: true,
+  origin: 'http://127.0.0.1:5173',
+}));
+
 async function uploadToS3(path, originalFilename, mimetype) {
   const client = new S3Client({
     region: 'us-east-1',
