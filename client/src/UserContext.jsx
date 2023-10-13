@@ -4,7 +4,7 @@ import {data} from "autoprefixer";
 
 export const UserContext = createContext({});
 
-export default function UserContextProvider({children}) {
+export const UserContextProvider = ({ children }) => {
   const [user,setUser] = useState(null);
   const [ready,setReady] = useState(false);
   useEffect(() => {
