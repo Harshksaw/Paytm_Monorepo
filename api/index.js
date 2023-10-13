@@ -12,13 +12,14 @@ const {S3Client, PutObjectCommand} = require('@aws-sdk/client-s3');
 const multer = require('multer');
 const fs = require('fs');
 const mime = require('mime-types');
+const jwtSecret = process.env.JWT_SECRET;
 
 require('dotenv').config();
 const app = express();
 
 const bcryptSalt = bcrypt.genSaltSync(10);
-const jwtSecret = 'fasefraw4r5r3wq45wdfgw34twdfg';
-const bucket = 'dawid-booking-app';
+
+const bucket = 'Harsh-booking';
 
 app.use(express.json());
 app.use(cookieParser());
