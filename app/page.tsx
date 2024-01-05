@@ -7,7 +7,7 @@ export default function Home() {
   return(
     <div>
 
-      <div className='grid grid-cols-1 md:grid-cols-3 h-full '>
+      <div className='grid grid-cols-1 md:grid-cols-3 h-full bg-gray-400 '>
         <div className='h-full'>
 
           <Booking/>
