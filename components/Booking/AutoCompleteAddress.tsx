@@ -53,8 +53,8 @@ const AutoCompleteAddress = () => {
 
 
   return (
-    <div className="mt-5 h-[20vh]  md:h-[60vh] flex flex-col  md:justify-evenly    ">
-      <div className="py-5 relative">
+    <div className="mt-2 h-[10vh]  md:h-[25vh] flex flex-col  md:justify-evenly    ">
+      <div className="py-0 relative">
         <label htmlFor="WhereFrom" className="text-gray-400">
           Where From
         </label>
@@ -91,7 +91,7 @@ const AutoCompleteAddress = () => {
         ) : null}
       </div>
 
-      <div className="py-5">
+      <div className="py-0 relative">
         <label htmlFor="Where To?" className="text-gray-400">
           Where To{" "}
         </label>
