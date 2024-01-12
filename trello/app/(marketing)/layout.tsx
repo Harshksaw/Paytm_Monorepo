@@ -13,3 +13,4 @@ const marketinglayout = (
     )
     
 }
+export default marketinglayout
