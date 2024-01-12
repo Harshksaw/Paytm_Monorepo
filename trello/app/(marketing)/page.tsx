@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { Medal } from "lucide-react";
 import { Poppins } from "next/font/google";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const textFont = Poppins({
     subsets: ["latin"],
@@ -24,9 +24,11 @@ const MarketingPage = () => {
     return (
         <div className="flex items-center justify-center flex-col ">
             <div className="flex items-center justify-center flex-col">
-                <div>
+                <div className="flex flex-col bg-yellow-500">
                     <Medal className='h-6 w-6 mr-2' />
-                    tast management
+                    <h3>
+                        tast management
+                        </h3> 
                 </div>
                 <h2 className='text-3xl md:text-6xl text-center  text-neutral-600'> Taskify helps team move</h2>
                 <div className='text-3xl md:text-6xl bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white px-4 p-2 rounded-md pb-4 w-fit '>
