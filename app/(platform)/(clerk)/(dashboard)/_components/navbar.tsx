@@ -10,6 +10,7 @@ import { MobileSidebar } from "./mobile-sidebar";
 export const Navbar = () => {
   return (
     <nav className="fixed z-50 top-0 px-4 w-full h-14 border-b shadow-sm bg-blue-500 flex items-center">
+
       <MobileSidebar />
       <div className="flex items-center gap-x-4">
         <div className="hidden md:flex">
@@ -25,7 +26,7 @@ export const Navbar = () => {
           </Button>
 
       </div>
-      <div className="ml-40 flex items-center gap-x-2">
+      <div className="ml-auto flex items-center gap-x-2">
         <OrganizationSwitcher
           hidePersonal
           afterCreateOrganizationUrl="/organization/:id"
