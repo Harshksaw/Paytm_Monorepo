@@ -1,3 +1,5 @@
+import { OrganizationProfile } from "@clerk/nextjs"
+
 const SettingsPage = ()=>{
 
     return(
