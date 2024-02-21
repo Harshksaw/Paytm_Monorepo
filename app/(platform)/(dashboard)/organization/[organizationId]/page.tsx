@@ -1,6 +1,7 @@
 "use client"
-import {db } from "../"
-import {create} from "../actions/create-board"
+import { Button } from "@/components/ui/button"
+import {db } from "../../../../../lib/db"
+import {create} from "@/actions/create-board"
 const OrganizationIdPage = () => {
     console.log("OrganizationIdPage")
   
