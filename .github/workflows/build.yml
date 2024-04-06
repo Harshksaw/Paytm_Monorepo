@@ -1,9 +1,13 @@
 name: Build on PR
 
 on:
-  pull_request:
-    branches:
-      - cicdDep
+  on:
+    pull_request:
+      branches:
+        - cicdDep
+    push:
+      branches:
+        - cicdDep
 
 jobs:
   build:
@@ -19,8 +23,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
       
-      # - name: Generate prisma client
-      #   run: npm run db:generate
+      - name: Generate prisma client
+        run: npm run db:generate
         
       - name: Run Build
         run: npm run build
